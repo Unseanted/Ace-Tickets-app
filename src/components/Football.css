@@ -1,0 +1,7 @@
+.football-page {
+  background-image: url('./football.jpg');
+  background-size: cover;
+  color: white;
+  height: 100vh;
+  padding: 20px;
+}

@@ -1,0 +1,7 @@
+.movies-page {
+  background-image: url('./movies.jpg');
+  background-size: cover;
+  color: white;
+  height: 100vh;
+  padding: 20px;
+}

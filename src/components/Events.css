@@ -1,0 +1,8 @@
+.events-page {
+  background-image: url('./events.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: white;
+  height: 100vh;
+  padding: 20px;
+}

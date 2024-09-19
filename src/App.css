@@ -1,3 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Roboto:wght@400&display=swap');
+
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+}
+
+p, body {
+    font-family: 'Roboto', sans-serif;
+    color: #666;
+}
+
 .App {
   text-align: center;
 }
@@ -35,4 +48,41 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+@media (max-width: 768px) {
+    header {
+        padding: 10px;
+    }
+
+    .navbar {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .nav-link {
+        padding: 10px;
+    }
+
+    .welcome-section {
+        padding: 20px;
+        text-align: center;
+    }
+}
+
+/* Mobile screens */
+@media (max-width: 480px) {
+    .navbar {
+        display: block;
+        text-align: center;
+    }
+
+    .nav-link {
+        display: block;
+        margin: 10px 0;
+    }
+
+    .footer {
+        text-align: center;
+    }
 }

@@ -1,0 +1,16 @@
+/*FormStyles.css */
+
+.invalid-field {
+  border: 2px solid red;
+  background-color: #ffe6e6;
+}
+
+.valid-field {
+  border: 2px solid green;
+}
+
+.error-message {
+  color: red;
+  font-size: 0.9em;
+  margin-top: 0.5em;
+}

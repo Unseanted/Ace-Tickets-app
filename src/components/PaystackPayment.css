@@ -1,0 +1,18 @@
+.paystack-button-wrapper {
+  display: inline-block;
+}
+
+.paystack-button-wrapper .paystack-pay-button {
+  background-color: green !important;
+  color: white !important;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.paystack-button-wrapper .paystack-pay-button:hover {
+  background-color: darkgreen !important;
+}
