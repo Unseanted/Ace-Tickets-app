@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { PaystackButton } from 'react-paystack';
 import TicketModal from './TicketModal';
-import './PaystackPayment.css'; // Import the CSS file for custom styles
+import './PaystackPayment.css';
 
 const PaystackPayment = ({ amount, ticketInfo }) => {
-  const publicKey = 'pk_test_50d6893eedd19ffff45142df8c8b6619883a0509';
+  const paystackPublicKey = process.env.REACT_APP_PAYSTACK_PUBLIC_KEY;
   const [showModal, setShowModal] = useState(false);
 
   const handlePaymentSuccess = (reference) => {
@@ -15,7 +15,7 @@ const PaystackPayment = ({ amount, ticketInfo }) => {
   const componentProps = {
     email: 'user@example.com',
     amount: amount * 100,
-    publicKey,
+    paystackPublicKey,
     text: 'Pay Now',
     onSuccess: handlePaymentSuccess,
     onClose: () => alert('Wait! You need this ticket, don’t go!!!!'),

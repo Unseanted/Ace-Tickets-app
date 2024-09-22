@@ -19,8 +19,8 @@ const App = () => {
         <Logo />
         <Routes>
           <Route path="/" element={<Welcome />} />
-          <Route path="/login" component={Login} />
-          <Route path="/signup" component={SignUp} />
+          <Route path="/login" element={<Login />} /> {/* Fix here */}
+          <Route path="/signup" element={<SignUp />} /> {/* Fix here */}
           <Route path="/football" element={<Football />} />
           <Route path="/movies" element={<Movies />} />
           <Route path="/events" element={<Events />} />

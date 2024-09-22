@@ -39,15 +39,13 @@ const SignUp = () => {
     const validationErrors = validateForm();
 
     if (Object.keys(validationErrors).length === 0) {
-      handleSubmit(e); // Trigger handleSubmit for registration process
+      handleSubmit(); // Trigger handleSubmit for registration process
     } else {
       setErrors(validationErrors);
     }
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
+  const handleSubmit = async () => {
     try {
       const response = await axios.post('https://acetickets.vercel.app/api/auth/register', {
         name,
@@ -69,40 +67,49 @@ const SignUp = () => {
       <h2>Sign Up</h2>
       <form onSubmit={handleSignUp}>
         <div className="form-group">
-          <label>Full Name</label>
+          <label htmlFor="name">Full Name</label>
           <input
             type="text"
+            id="name"
             className={`form-control ${errors.name ? 'invalid-field' : 'valid-field'}`}
             placeholder="Enter full name"
             value={name}
             onChange={(e) => setName(e.target.value)}
+            aria-invalid={errors.name ? "true" : "false"}
+            aria-describedby={errors.name ? "name-error" : undefined}
             required
           />
-          {errors.name && <small className="error-message">{errors.name}</small>}
+          {errors.name && <small id="name-error" className="error-message">{errors.name}</small>}
         </div>
         <div className="form-group">
-          <label>Email address</label>
+          <label htmlFor="email">Email address</label>
           <input
             type="email"
+            id="email" 
             className={`form-control ${errors.email ? 'invalid-field' : 'valid-field'}`}
             placeholder="Enter email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            aria-invalid={errors.email ? "true" : "false"} 
+            aria-describedby={errors.email ? "email-error" : undefined}
             required
           />
-          {errors.email && <small className="error-message">{errors.email}</small>}
+          {errors.email && <small id="email-error" className="error-message">{errors.email}</small>}
         </div>
         <div className="form-group">
-          <label>Password</label>
+          <label htmlFor="password">Password</label>
           <input
             type="password"
+            id="password"
             className={`form-control ${errors.password ? 'invalid-field' : 'valid-field'}`}
             placeholder="Enter password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            aria-invalid={errors.password ? "true" : "false"}
+            aria-describedby={errors.password ? "password-error" : undefined}
             required
           />
-          {errors.password && <small className="error-message">{errors.password}</small>}
+          {errors.password && <small id="password-error" className="error-message">{errors.password}</small>}
         </div>
         {signUpError && <div className="alert alert-danger">{signUpError}</div>} {/* Display error only */}
         <button type="submit" className="btn btn-primary btn-block">

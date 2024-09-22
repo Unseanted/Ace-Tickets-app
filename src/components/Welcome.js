@@ -1,6 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import './Welcome.css';
+import moviesImage from './movies1.png';
+import sportsImage from './sports.png';
+import eventsImage from './event1.png';
 
 const Welcome = () => {
   return (
@@ -22,24 +25,27 @@ const Welcome = () => {
         </motion.div>
         <div className="welcome-images">
           <motion.img
-            src="./movies1.png"
+            src={moviesImage}
             alt="Movies"
+            title="Book movie tickets"
             className="welcome-image"
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.4 }}
           />
           <motion.img
-            src="./sports.png"
+            src={sportsImage}
             alt="Football"
+            title="Book football match tickets"
             className="welcome-image"
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.6 }}
           />
           <motion.img
-            src="./event1.png"
+            src={eventsImage}
             alt="Events"
+            title="Book event tickets"
             className="welcome-image"
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}

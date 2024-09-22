@@ -9,7 +9,11 @@ dotenv.config(); // Load environment variables from .env
 const app = express();
 
 // Connect to MongoDB
-connectDB(mongoose.connect('mongodb+srv://sinbad4u89:vvYzak3jbswj8tVU@cluster0.mzmw0.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', { useNewUrlParser: true, useUnifiedTopology: true });
+connectDB(
+  mongoose.connect(process.env.MONGO_URI, { 
+    useNewUrlParser: true, 
+    useUnifiedTopology: true 
+  })
 );
 
 // Middleware
@@ -24,7 +28,6 @@ app.use(passport.initialize()); // Initialize Passport
 // Routes
 app.use('/api/auth', require('./routes/auth')); // Authentication routes
 
-// Example of a protected route
 app.get('/api/protected', authenticateJWT, (req, res) => {
   res.send('This is a protected route');
 });

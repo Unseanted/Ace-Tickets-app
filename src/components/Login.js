@@ -33,17 +33,15 @@ const Login = () => {
     
     if (Object.keys(validationErrors).length === 0) {
       console.log('Logging in with:', email, password);
-      handleSubmit(e); // Trigger handleSubmit when form is valid
+      handleSubmit(); // Trigger handleSubmit when form is valid
     } else {
       setErrors(validationErrors);
     }
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
+  const handleSubmit = async () => {
     try {
-      const response = await axios.post('https://acetickets.vercel.com/api/auth/login', {
+      const response = await axios.post('https://acetickets.vercel.app/api/auth/login', {
         email,
         password
       });
@@ -64,28 +62,34 @@ const Login = () => {
       <h2>Login</h2>
       <form onSubmit={handleLogin}>
         <div className="form-group">
-          <label>Email address</label>
+          <label htmlFor="email">Email address</label>
           <input
             type="email"
+            id="email" // Added id for accessibility
             className={`form-control ${errors.email ? 'invalid-field' : 'valid-field'}`}
             placeholder="Enter email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            aria-invalid={errors.email ? "true" : "false"} // Accessibility
+            aria-describedby={errors.email ? "email-error" : undefined}
             required
           />
-          {errors.email && <small className="error-message">{errors.email}</small>}
+          {errors.email && <small id="email-error" className="error-message">{errors.email}</small>}
         </div>
         <div className="form-group">
-          <label>Password</label>
+          <label htmlFor="password">Password</label>
           <input
             type="password"
+            id="password" // Added id for accessibility
             className={`form-control ${errors.password ? 'invalid-field' : 'valid-field'}`}
             placeholder="Enter password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            aria-invalid={errors.password ? "true" : "false"} // Accessibility
+            aria-describedby={errors.password ? "password-error" : undefined}
             required
           />
-          {errors.password && <small className="error-message">{errors.password}</small>}
+          {errors.password && <small id="password-error" className="error-message">{errors.password}</small>}
         </div>
         {loginError && <div className="alert alert-danger">{loginError}</div>} {/* Display login error */}
         <button type="submit" className="btn btn-primary btn-block">
