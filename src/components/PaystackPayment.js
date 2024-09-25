@@ -14,7 +14,7 @@ const PaystackPayment = ({ amount, ticketInfo }) => {
 
   const componentProps = {
     email: 'user@example.com',
-    amount: amount * 100,
+    amount: amount * 1000,
     paystackPublicKey,
     text: 'Pay Now',
     onSuccess: handlePaymentSuccess,
