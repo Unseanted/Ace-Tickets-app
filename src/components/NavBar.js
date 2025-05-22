@@ -5,10 +5,10 @@ const NavBar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <Link className="navbar-brand" to="/">
-        Ace-Tickets
+      
       </Link>
-      <div className="collapse navbar-collapse">
-        <ul className="navbar-nav mr-auto">
+      <div className="collapse navbar-collapse ">
+        <ul className="navbar-nav mr-auto ">
           <li className="nav-item">
             <Link className="nav-link" to="/football">
               Football Matches

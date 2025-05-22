@@ -14,9 +14,9 @@ import './App.css';
 const App = () => {
   return (
     <Router>
-      <NavBar />
       <div className="container">
         <Logo />
+        <NavBar />
         <Routes>
           <Route path="/" element={<Welcome />} />
           <Route path="/login" element={<Login />} /> {/* Fix here */}

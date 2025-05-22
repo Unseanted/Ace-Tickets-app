@@ -63,15 +63,17 @@ const SignUp = () => {
   };
 
   return (
-    <div className="container mt-5">
-      <h2>Sign Up</h2>
+    <div className="container mt-5 mx-auto d-block">
+      <h2 className=''>Sign Up</h2>
       <form onSubmit={handleSignUp}>
         <div className="form-group">
           <label htmlFor="name">Full Name</label>
           <input
             type="text"
             id="name"
-            className={`form-control ${errors.name ? 'invalid-field' : 'valid-field'}`}
+            className={`form-control ${
+              errors.name ? "invalid-field" : "valid-field"
+            }`}
             placeholder="Enter full name"
             value={name}
             onChange={(e) => setName(e.target.value)}
@@ -79,29 +81,41 @@ const SignUp = () => {
             aria-describedby={errors.name ? "name-error" : undefined}
             required
           />
-          {errors.name && <small id="name-error" className="error-message">{errors.name}</small>}
+          {errors.name && (
+            <small id="name-error" className="error-message">
+              {errors.name}
+            </small>
+          )}
         </div>
         <div className="form-group">
           <label htmlFor="email">Email address</label>
           <input
             type="email"
-            id="email" 
-            className={`form-control ${errors.email ? 'invalid-field' : 'valid-field'}`}
+            id="email"
+            className={`form-control ${
+              errors.email ? "invalid-field" : "valid-field"
+            }`}
             placeholder="Enter email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            aria-invalid={errors.email ? "true" : "false"} 
+            aria-invalid={errors.email ? "true" : "false"}
             aria-describedby={errors.email ? "email-error" : undefined}
             required
           />
-          {errors.email && <small id="email-error" className="error-message">{errors.email}</small>}
+          {errors.email && (
+            <small id="email-error" className="error-message">
+              {errors.email}
+            </small>
+          )}
         </div>
         <div className="form-group">
           <label htmlFor="password">Password</label>
           <input
             type="password"
             id="password"
-            className={`form-control ${errors.password ? 'invalid-field' : 'valid-field'}`}
+            className={`form-control ${
+              errors.password ? "invalid-field" : "valid-field"
+            }`}
             placeholder="Enter password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -109,10 +123,18 @@ const SignUp = () => {
             aria-describedby={errors.password ? "password-error" : undefined}
             required
           />
-          {errors.password && <small id="password-error" className="error-message">{errors.password}</small>}
+          {errors.password && (
+            <small id="password-error" className="error-message">
+              {errors.password}
+            </small>
+          )}
         </div>
-        {signUpError && <div className="alert alert-danger">{signUpError}</div>} {/* Display error only */}
-        <button type="submit" className="btn btn-primary btn-block">
+        {signUpError && <div className="alert alert-danger">{signUpError}</div>}{" "}
+        {/* Display error only */}
+        <button
+          type="submit"
+          className="btn btn-primary btn-block mx-auto d-block mt-4"
+        >
           Sign Up
         </button>
       </form>
