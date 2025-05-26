@@ -35,6 +35,10 @@ app.use(passport.initialize());
 
 // Routes
 app.use('/api/auth', require('./routes/auth')); // Authentication routes
+app.use('/api/events', require('./routes/events')); // Event routes
+app.use('/api/movies', require('./routes/movies')); // Movie routes
+app.use('/api/matches', require('./routes/matches')); // Match routes
+
 
 // Protected route example
 app.get('/api/protected', authenticateJWT, (req, res) => {
