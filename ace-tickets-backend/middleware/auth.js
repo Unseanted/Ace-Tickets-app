@@ -1,14 +1,14 @@
-const passport = require('passport');
-const JwtStrategy = require('passport-jwt').Strategy;
-const ExtractJwt = require('passport-jwt').ExtractJwt;
-const User = require('../models/User'); // User model
+const passport = require("passport");
+const JwtStrategy = require("passport-jwt").Strategy;
+const ExtractJwt = require("passport-jwt").ExtractJwt;
+const User = require("../models/User"); // User model
 
-require('dotenv').config(); // For using environment variables
+require("dotenv").config(); // For using environment variables
 
 // Passport JWT options
 const opts = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-  secretOrKey: process.env.JWT_SECRET // Environment variable
+  secretOrKey: process.env.JWT_SECRET, // Environment variable
 };
 
 // JWT Strategy for passport
@@ -28,6 +28,6 @@ passport.use(
 );
 
 // Middleware to protect routes
-const authenticateJWT = passport.authenticate('jwt', { session: false });
+const authenticateJWT = passport.authenticate("jwt", { session: false });
 
 module.exports = { passport, authenticateJWT };
