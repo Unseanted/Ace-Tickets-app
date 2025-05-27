@@ -1,9 +1,15 @@
 const express = require("express");
-const { getTicket } = require("../controllers/ticketController");
+const {
+  getUserTickets,
+  createTicket,
+} = require("../controllers/ticketController");
 const { authenticateJWT } = require("../middleware/auth");
 
 const router = express.Router();
 
-router.get("/", authenticateJWT, getTicket);
+// Protected routes
+
+router.get("/", authenticateJWT, getUserTickets);
+router.post("/", authenticateJWT, createTicket);
 
 module.exports = router;

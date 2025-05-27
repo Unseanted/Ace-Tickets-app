@@ -1,30 +1,14 @@
-const events = [
-  {
-    id: 1,
-    name: "Rema Album tour",
-    type: "concert",
-    description: "Rema is coming to town",
-    date: "2021-01-01",
-    venue: "Eko Atlantic",
-    available: true,
-  },
-  {
-    id: 2,
-    name: "Google Develper Conference",
-    type: "conference",
-    description: "I don't know",
-    date: "2021-01-02",
-    venue: "Tamarald Event Center",
-    available: false,
-  },
-];
-
 const Event = require("../models/Event");
 
 // Get all events
 const getAllEvents = async (req, res) => {
   try {
-    const events = await Event.find({ category: "event" }).sort({ date: 1 }); // Sort by date ascending
+    const category = req.query.category;
+    if (!category) {
+      const events = await Event.find().sort({ date: 1 }); // Sort by date ascending
+      return res.status(200).json({ events });
+    }
+    const events = await Event.find({ category }).sort({ date: 1 }); // Sort by date ascending
     res.status(200).json(events);
   } catch (error) {
     res
@@ -48,10 +32,13 @@ const getOneEvent = async (req, res) => {
   }
 };
 
-// Create new event
 const createEvent = async (req, res) => {
   try {
-    const event = new Event(req.body);
+    const event = new Event({
+      ...req.body,
+      availableTickets: parseInt(req.body.availableTickets) || 0, // Default to 0 if not provided
+    });
+
     await event.save();
     res.status(201).json(event);
   } catch (error) {

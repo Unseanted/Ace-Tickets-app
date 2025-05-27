@@ -19,7 +19,7 @@ const eventSchema = new mongoose.Schema(
     category: {
       type: String,
       required: true,
-      enum: ["movie", "football", "event"],
+      enum: ["movie", "football", "conference", "concert"],
     },
     status: {
       type: String,
