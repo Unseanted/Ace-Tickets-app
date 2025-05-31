@@ -1,7 +1,7 @@
 ##Ace-Tickets 🎟️
 Ace-Tickets is a full-stack web application designed to facilitate ticket booking for football matches, movies, and events. The app uses React.js for the frontend and Express.js with Python for the backend, incorporating JWT-based authentication and Paystack payment integration.
 
---Table of Contents
+# --Table of Contents
 +- Features
 +- Tech Stack
 +- Project Structure
@@ -89,26 +89,26 @@ Frontend:
 /events: Select and book event tickets
 /login: Login page
 /signup: Signup page
---+ Frontend
+# --+ Frontend
 Main Components:
 NavBar: Navigation bar with links to different sections (movies, events, football).
 Welcome: Animated welcome section with an event calendar.
 TicketModal: Modal showing ticket QR code after successful payment.
 PaystackPayment: Paystack integration for handling payments.
 Login & Signup: Authentication forms with validation and error handling.
---+ Backend
+# --+ Backend
 Authentication:
 JWT Authentication: Passport.js is used for securing routes with JWT tokens.
 bcrypt.js: Passwords are hashed for security.
---Database:
+# --Database:
 MongoDB: Used to store user information (register/login).
---Middleware:
+# --Middleware:
 auth.js: Handles JWT strategy with Passport.js for protecting API routes.
---Security
+# --Security
 JWT-based Authentication: Ensures secure access to protected routes.
 Environment Variables: Sensitive information (e.g., JWT secret, Paystack keys) is stored in .env files.
 Password Hashing: User passwords are hashed using bcrypt.
---Future Enhancements
+# --Future Enhancements
 Add a search functionality for movies and events.
 Implement user profile pages to view and manage bookings.
 Add filters for different genres and categories in the movie and event selection pages.
@@ -116,8 +116,8 @@ Integrate social login (e.g., Google, Facebook).
 Provide email notifications for upcoming events.
 
 
---Project by: Sean Samuel
---X.com/xinbadt
+# Project by: ##Sean Samuel
+# X.com/xinbadt
 
 # Getting Started with Create React App
 
