@@ -1,8 +1,6 @@
 # Ace-Tickets 🎟️
 
-Ace-Tickets is a full-stack web application designed to facilitate ticket booking for football matches, movies, and events. The app uses React.js for the frontend and Express.js with Python for the backend, incorporating JWT-based authentication and Paystack payment integration.
-
-<<<<<<< HEAD
+Ace-Tickets is a full-stack web application designed to facilitate ticket booking for football matches, movies, and events. The app uses React.js for the frontend and Express.js with Python for the backend, incorporating JWT-based authentication and Paystack payment integration
 # --Table of Contents
 +- Features
 +- Tech Stack
@@ -23,7 +21,7 @@ Payment Integration: Users can pay for tickets via Paystack.
 User Authentication: Secure user registration and login with JWT.
 Form Validation: User-friendly form validation and error handling.
 Event Calendar: A calendar component to track upcoming events and movies.
-=======
+
 ## Table of Contents
 - [Features](#features)
 - [Tech Stack](#tech-stack)
@@ -46,7 +44,7 @@ Event Calendar: A calendar component to track upcoming events and movies.
 - **Form Validation**: User-friendly form validation and error handling
 - **Event Calendar**: A calendar component to track upcoming events and movies
 
->>>>>>> af977db1d8f80cf4362e578b5c76d44abd17e3a0
+
 ## Tech Stack
 
 ### Frontend
@@ -100,7 +98,7 @@ ace-tickets/
 
 ## Installation
 
-<<<<<<< HEAD
+
 Usage
 Register and Login: Users can register and login to purchase tickets.
 Browse Events and Movies: Users can browse football games, movies, and events from different categories.
@@ -148,7 +146,7 @@ Provide email notifications for upcoming events.
 - Node.js installed locally
 - MongoDB setup for database
 - Paystack account for payment gateway
->>>>>>> af977db1d8f80cf4362e578b5c76d44abd17e3a0
+
 
 ## Usage
 1. **Register and Login**: Users can register and login to purchase tickets
@@ -159,9 +157,9 @@ Provide email notifications for upcoming events.
 <<<<<<< HEAD
 # Project by: ##Sean Samuel
 # X.com/xinbadt
-=======
+
 ## Routes
->>>>>>> af977db1d8f80cf4362e578b5c76d44abd17e3a0
+
 
 ### Backend Routes
 - `POST /api/auth/register`: Register a new user

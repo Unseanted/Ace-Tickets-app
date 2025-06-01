@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import axios from 'axios';
+import './SharedStyles.css';
+
+const API_URL = process.env.REACT_APP_API_URL || 'https://acetickets.vercel.app';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -12,180 +16,189 @@ const Login = () => {
 
   const validateForm = () => {
     const validationErrors = {};
-    const emailRegex = /\S+@\S+\.\S+/;
+    // More comprehensive email regex
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
 
     if (!email) {
       validationErrors.email = 'Email is required';
     } else if (!emailRegex.test(email)) {
-      validationErrors.email = 'Invalid email format';
+      validationErrors.email = 'Please enter a valid email address';
     }
 
     if (!password) {
       validationErrors.password = 'Password is required';
     } else if (password.length < 6) {
-      validationErrors.password = 'Password must be at least 6 characters';
+      validationErrors.password = 'Password must be at least 6 characters long';
     }
 
     return validationErrors;
   };
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    
-    if (errors[name]) {
-      setErrors(prev => ({ ...prev, [name]: '' }));
-    }
-    if (loginError) setLoginError('');
-
-    if (name === 'email') setEmail(value);
-    if (name === 'password') setPassword(value);
-  };
-
-  const handleSubmit = async (e) => {
+  const handleLogin = (e) => {
     e.preventDefault();
+    setLoginError('');
     const validationErrors = validateForm();
     
-    if (Object.keys(validationErrors).length > 0) {
-      return setErrors(validationErrors);
+    if (Object.keys(validationErrors).length === 0) {
+      handleSubmit();
+    } else {
+      setErrors(validationErrors);
     }
+  };
 
+  const handleSubmit = async () => {
     setIsLoading(true);
-    setLoginError('');
-
     try {
-      const response = await axios.post('https://acetickets.vercel.app/api/auth/login', {
+      const response = await axios.post(`${API_URL}/api/auth/login`, {
         email,
         password
       });
 
-      try {
+      if (response.data.token) {
+        // Store the token securely
         localStorage.setItem('token', response.data.token);
+        // Set authorization header for future requests
+        axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
         navigate('/');
-      } catch (storageError) {
-        console.error('LocalStorage error:', storageError);
-        setLoginError('Failed to save login session');
+      } else {
+        setLoginError('Invalid response from server');
       }
     } catch (error) {
-      const errorMessage = error.response?.data?.message || 
-                          error.message || 
-                          'Login failed. Please try again.';
-      setLoginError(errorMessage);
+      if (!error.response) {
+        setLoginError('Network error. Please check your internet connection.');
+      } else if (error.response.status === 401) {
+        setLoginError('Invalid email or password');
+      } else if (error.response.status === 429) {
+        setLoginError('Too many login attempts. Please try again later.');
+      } else {
+        setLoginError(error.response?.data?.message || 'An unexpected error occurred');
+      }
+      console.error('Login error:', error);
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
-      <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Sign in to your account</h2>
-      </div>
-
-      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+    <div className="gradient-background flex items-center justify-center p-4">
+      <motion.div 
+        className="glass-container w-full max-w-md"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+      >
+        <motion.h2 
+          className="text-3xl font-bold text-white mb-6 text-center"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
+          Login to Ace-Tickets
+        </motion.h2>
+        <form onSubmit={handleLogin} noValidate>
+          <motion.div 
+            className="form-group mb-4"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+          >
+            <label htmlFor="email" className="block mb-2">Email address</label>
+            <input
+              type="email"
+              id="email"
+              className={`form-control w-full p-3 rounded-lg ${errors.email ? 'border-red-400' : ''}`}
+              placeholder="Enter email"
+              value={email}
+              onChange={(e) => {
+                setEmail(e.target.value);
+                setErrors((prev) => ({ ...prev, email: '' }));
+              }}
+              aria-invalid={errors.email ? "true" : "false"}
+              aria-describedby={errors.email ? "email-error" : undefined}
+              disabled={isLoading}
+              required
+            />
+            {errors.email && (
+              <motion.small 
+                id="email-error" 
+                className="error-message block mt-1"
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                {errors.email}
+              </motion.small>
+            )}
+          </motion.div>
+          <motion.div 
+            className="form-group mb-4"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+          >
+            <label htmlFor="password" className="block mb-2">Password</label>
+            <input
+              type="password"
+              id="password"
+              className={`form-control w-full p-3 rounded-lg ${errors.password ? 'border-red-400' : ''}`}
+              placeholder="Enter password"
+              value={password}
+              onChange={(e) => {
+                setPassword(e.target.value);
+                setErrors((prev) => ({ ...prev, password: '' }));
+              }}
+              aria-invalid={errors.password ? "true" : "false"}
+              aria-describedby={errors.password ? "password-error" : undefined}
+              disabled={isLoading}
+              required
+            />
+            {errors.password && (
+              <motion.small 
+                id="password-error" 
+                className="error-message block mt-1"
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                {errors.password}
+              </motion.small>
+            )}
+          </motion.div>
           {loginError && (
-            <div className="mb-4 bg-red-50 border-l-4 border-red-500 p-4">
-              <p className="text-sm text-red-700">{loginError}</p>
-            </div>
+            <motion.div 
+              className="alert alert-danger p-3 rounded-lg mb-4"
+              role="alert"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.3 }}
+            >
+              {loginError}
+            </motion.div>
           )}
-
-          <form className="space-y-6" onSubmit={handleSubmit}>
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                Email address
-              </label>
-              <div className="mt-1">
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  autoComplete="email"
-                  value={email}
-                  onChange={handleInputChange}
-                  className={`appearance-none block w-full px-3 py-2 border ${errors.email ? 'border-red-300' : 'border-gray-300'} rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm`}
-                  placeholder="Enter your email"
-                  aria-invalid={!!errors.email}
-                  aria-describedby={errors.email ? "email-error" : undefined}
-                  required
-                />
-                {errors.email && (
-                  <p className="mt-2 text-sm text-red-600" id="email-error">
-                    {errors.email}
-                  </p>
-                )}
-              </div>
-            </div>
-
-            <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-                Password
-              </label>
-              <div className="mt-1">
-                <input
-                  id="password"
-                  name="password"
-                  type="password"
-                  autoComplete="current-password"
-                  value={password}
-                  onChange={handleInputChange}
-                  className={`appearance-none block w-full px-3 py-2 border ${errors.password ? 'border-red-300' : 'border-gray-300'} rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm`}
-                  placeholder="Enter your password"
-                  aria-invalid={!!errors.password}
-                  aria-describedby={errors.password ? "password-error" : undefined}
-                  required
-                  minLength="6"
-                />
-                {errors.password && (
-                  <p className="mt-2 text-sm text-red-600" id="password-error">
-                    {errors.password}
-                  </p>
-                )}
-              </div>
-            </div>
-
-            <div>
-              <button
-                type="submit"
-                disabled={isLoading}
-                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+          <motion.button 
+            type="submit" 
+            className="btn-primary w-full p-3 rounded-lg font-medium"
+            disabled={isLoading}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.5 }}
+          >
+            {isLoading ? (
+              <motion.span
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.3 }}
               >
-                {isLoading ? (
-                  <>
-                    <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                    </svg>
-                    Signing in...
-                  </>
-                ) : 'Sign in'}
-              </button>
-            </div>
-          </form>
-
-          <div className="mt-6">
-            <div className="relative">
-              <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-gray-300"></div>
-              </div>
-              <div className="relative flex justify-center text-sm">
-                <span className="px-2 bg-white text-gray-500">
-                  Don't have an account?
-                </span>
-              </div>
-            </div>
-
-            <div className="mt-6">
-              <button
-                type="button"
-                onClick={() => navigate('/signup')}
-                className="w-full flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-              >
-                Create new account
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+                Logging in...
+              </motion.span>
+            ) : (
+              'Login'
+            )}
+          </motion.button>
+        </form>
+      </motion.div>
     </div>
   );
 };
