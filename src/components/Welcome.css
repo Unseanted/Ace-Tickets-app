@@ -2,7 +2,9 @@
 .welcome-container {
   padding: 20px;
   text-align: center;
-  background-image: url('./background.jpg');
+    background-image: url('./background.jpg');  
+   /* background-image: url('/background.jpg'); */
+
   background-size: cover;
   background-position: center;
   color: #fff;
@@ -23,7 +25,7 @@ h1 {
   font-size: 3rem; /* Adjust size for better visibility */
   font-weight: 900; /* Make the h1 text bold */
   margin-top: -50px; /* Move the h1 higher up */
-  color: #d8b4fe; /* Light purple color for h1 */
+  color: #a78cc5; /* Light purple color for h1 */
 }
 
 p {

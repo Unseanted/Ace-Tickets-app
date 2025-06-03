@@ -13,10 +13,13 @@ import './App.css';
 
 const App = () => {
   return (
+    
     <Router>
+      
       <div className="container">
-        <Logo />
+        {/* <Logo /> */}
         <NavBar />
+        
         <Routes>
           <Route path="/" element={<Welcome />} />
           <Route path="/login" element={<Login />} /> {/* Fix here */}
@@ -28,6 +31,7 @@ const App = () => {
       </div>
       <Footer />
     </Router>
+    
   );
 }
 

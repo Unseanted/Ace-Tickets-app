@@ -1,4 +1,114 @@
-/*FormStyles.css */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+body, .login-page {
+  font-family: 'Roboto', sans-serif;
+  height: 100vh;
+  margin: 0;
+  background: linear-gradient(135deg, #004e64, #00bcd4);
+  background-size: cover;
+  background-position: center;
+}
+
+.login-page {
+  padding: 1rem;
+}
+
+.login-form-container {
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  width: 100%;
+  max-width: 400px;
+  color: white;
+}
+
+.text-cyan {
+  color: #00bcd4;
+}
+
+.btn-cyan {
+  background-color: #00a0c0;
+  color: white;
+  border: none;
+}
+
+.btn-cyan:hover {
+  background-color: #008fb0;
+}
+
+.form-control:focus {
+  border-color: #00bcd4;
+  box-shadow: 0 0 0 0.2rem rgba(0, 188, 212, 0.25);
+}
+
+.btn-cyan {
+  background-color: #00acc1;
+  color: white;
+  font-weight: 600;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+.btn-cyan:hover {
+  background-color: #008da0;
+}
+
+.forgot-password-link {
+  color: #00bcd4;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.forgot-password-link:hover {
+  color: #00e5ff;
+  text-decoration: underline;
+}
+/* .login-wrapper {
+  min-height: 100vh;
+  background: url('/background.jpg') no-repeat center center fixed;
+  background-size: cover;
+} */
+
+.login-box {
+  background: rgba(0, 0, 0, 0.65);
+  width: 100%;
+  max-width: 360px;
+}
+
+
+
+.forgot-password-link {
+  color: #00e5ff;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.forgot-password-link:hover {
+  color: #b2fefa;
+  text-decoration: underline;
+}
+
+input.form-control-sm {
+  font-size: 0.85rem;
+  padding: 0.4rem 0.6rem;
+}
+
+label.form-label {
+  font-weight: 500;
+}
+
+#form{
+  margin-top: 110px;
+
+}
+
+/* #pass{
+  margin-bottom:-90px;
+} */
+
+
+
+/* FormStyles.css
 
 .invalid-field {
   border: 2px solid red;
@@ -13,4 +123,4 @@
   color: red;
   font-size: 0.9em;
   margin-top: 0.5em;
-}
+} */

@@ -1,8 +1,80 @@
+/* Events.css */
+
 .events-page {
+  min-height: 80vh;
+  background: url(/public/events.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  /* background: linear-gradient(to bottom right, #4316a5, #482757, #0f05a5); */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px 15px;
+  color: #fff;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.events-page form {
+  background: rgba(0, 0, 0, 0.55);
+  border-radius: 15px;
+  padding: 30px 25px;
+  max-width: 500px;
+  width: 100%;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.events-page h1 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 25px;
+  font-weight: bold;
+  color: #fffefe;
+  text-shadow: 1px 1px 3px #000;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 0.95rem;
+  color: #e0e0e0;
+}
+
+.form-group select {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: none;
+  background: #eee;
+  font-size: 0.95rem;
+}
+
+.form-group select:focus {
+  outline: none;
+  background: #fff;
+  box-shadow: 0 0 0 2px #9b59b6;
+}
+
+/*mobile-view*/
+@media (max-width: 600px) {
+  .events-page form {
+    padding: 20px;
+  }
+
+  .events-page h1 {
+    font-size: 1.6rem;
+  }
+}
+
+/* .events-page {
   background-image: url('./events.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   color: white;
   height: 100vh;
   padding: 20px;
-}
+} */

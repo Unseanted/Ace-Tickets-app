@@ -1,7 +1,48 @@
-.football-page {
+.football-wrapper {
+  min-height: 80vh;
+  background: url('/public/football.jpg') no-repeat center center fixed;
+  background-size: cover;
+  padding: 60px 20px;
+}
+
+.football-box {
+  background: linear-gradient(to bottom right, rgba(8, 11, 160, 0.712), rgba(34, 50, 139, 0.877));
+  max-width: 550px;
+  width: 100%;
+  border-radius: 16px;
+  color: white;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(1px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.form-control-sm {
+  font-size: 0.9rem;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+#btn-soccer {
+  background: linear-gradient(135deg, #0a8400, #4caf50);
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  font-weight: bold;
+  border-radius: 6px;
+  letter-spacing: 0.6px;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-soccer:hover {
+  background: linear-gradient(135deg, #087600, #388e3c);
+  transform: scale(1.02);
+}
+
+
+/* .football-page {
   background-image: url('./football.jpg');
   background-size: cover;
   color: white;
   height: 100vh;
   padding: 20px;
-}
+} */
