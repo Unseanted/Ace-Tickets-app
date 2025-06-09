@@ -1,80 +1,78 @@
-const express = require('express');
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const User = require('../models/User');
-const { register, login } = require('../controllers/authController');
-
+const express = require("express");
+// const bcrypt = require("bcryptjs");
+// const jwt = require("jsonwebtoken");
+// const User = require("../models/User");
+const { register, login } = require("../controllers/authController");
 
 const router = express.Router();
 
 // Register a new user
-router.post('/register', register);
+router.post("/register", register);
 
 // Login a user
-router.post('/login', login);
+router.post("/login", login);
 
 module.exports = router;
 
-router.post('/register', async (req, res) => {
-  const { name, email, password } = req.body;
-  
-  try {
-    // Check if user already exists
-    let user = await User.findOne({ email });
-    if (user) {
-      return res.status(400).json({ message: 'User already exists' });
-    }
+// router.post("/register", async (req, res) => {
+//   const { name, email, password } = req.body;
 
-    // Hash the password
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(password, salt);
+//   try {
+//     // Check if user already exists
+//     let user = await User.findOne({ email });
+//     if (user) {
+//       return res.status(400).json({ message: "User already exists" });
+//     }
 
-    // Create a new user
-    user = new User({
-      name,
-      email,
-      password: hashedPassword
-    });
+//     // Hash the password
+//     const salt = await bcrypt.genSalt(10);
+//     const hashedPassword = await bcrypt.hash(password, salt);
 
-    await user.save();
+//     // Create a new user
+//     user = new User({
+//       name,
+//       email,
+//       password: hashedPassword,
+//     });
 
-    // Create a token
-    const payload = { userId: user.id };
-    const token = jwt.sign(payload, 'your_jwt_secret', { expiresIn: '1h' });
+//     await user.save();
 
-    res.status(201).json({ token });
-  } catch (error) {
-    console.error(error.message);
-    res.status(500).send('Server error');
-  }
-});
+//     // Create a token
+//     const payload = { userId: user.id };
+//     const token = jwt.sign(payload, "your_jwt_secret", { expiresIn: "1h" });
 
-router.post('/login', async (req, res) => {
-  const { email, password } = req.body;
+//     res.status(201).json({ token });
+//   } catch (error) {
+//     console.error(error.message);
+//     res.status(500).send("Server error");
+//   }
+// });
 
-  try {
-    // Check if user exists
-    const user = await User.findOne({ email });
-    if (!user) {
-      return res.status(400).json({ message: 'Invalid email or password' });
-    }
+// router.post("/login", async (req, res) => {
+//   const { email, password } = req.body;
 
-    // Check if password matches
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) {
-      return res.status(400).json({ message: 'Invalid email or password' });
-    }
+//   try {
+//     // Check if user exists
+//     const user = await User.findOne({ email });
+//     if (!user) {
+//       return res.status(400).json({ message: "Invalid email or password" });
+//     }
 
-    // Create token
-    const payload = { userId: user.id };
-    const token = jwt.sign(payload, 'your_jwt_secret', { expiresIn: '5m' });
+//     // Check if password matches
+//     const isMatch = await bcrypt.compare(password, user.password);
+//     if (!isMatch) {
+//       return res.status(400).json({ message: "Invalid email or password" });
+//     }
 
-    res.json({ token });
-  } catch (error) {
-    console.error(error.message);
-    res.status(500).send('Server error');
-  }
-});
+//     // Create token
+//     const payload = { userId: user.id };
+//     const token = jwt.sign(payload, "your_jwt_secret", { expiresIn: "5m" });
 
-module.exports = router;
+//     res.json({ token });
+//   } catch (error) {
+//     console.error(error.message);
+//     res.status(500).send("Server error");
+//   }
+// });
 
+// module.exports = router;

@@ -164,7 +164,9 @@ Provide email notifications for upcoming events.
 ### Backend Routes
 - `POST /api/auth/register`: Register a new user
 - `POST /api/auth/login`: Login user and receive JWT
-- `GET /api/protected`: A sample protected route (requires JWT)
+- `POST /api/protected/tickets`: Create ticket for user (requires JWT)
+- `GET /api/protected/tickets`: Respond with user's tickets (requires JWT)
+- `GET /api/events`: Fetch all events (can be filtered by category e.g., movies, football)
 
 ### Frontend Routes
 - `/`: Home page with welcome section and event calendar
@@ -200,10 +202,9 @@ Provide email notifications for upcoming events.
 - **Environment Variables**: Sensitive information (e.g., JWT secret, Paystack keys) is stored in .env files
 - **Password Hashing**: User passwords are hashed using bcrypt
 
-## Future Enhancements
+## Possible Future Enhancements
 - Add a search functionality for movies and events
 - Implement user profile pages to view and manage bookings
-- Add filters for different genres and categories in the movie and event selection pages
 - Integrate social login (e.g., Google, Facebook)
 - Provide email notifications for upcoming events
 
