@@ -58,7 +58,7 @@ const Welcome = () => {
         <motion.div
           className="container rounded shadow-lg px-4 py-5 text-center"
           style={{
-            backdropFilter: "blur(8px)",
+            backdropFilter: "blur(1.2px)",
             backgroundColor: "rgba(0, 0, 0, 0.49)",
             maxWidth: "850px",
           }}

@@ -32,7 +32,7 @@ const Movies = () => {
   return (
     <div className="movies-page">
       <form onSubmit={(e) => e.preventDefault()}>
-        <h1>Movie Tickets</h1>
+        <h1 className="text-light">Movie Tickets</h1>
         <div className="form-group">
           <label htmlFor="genreSelect">Select Genre:</label>
           <select
